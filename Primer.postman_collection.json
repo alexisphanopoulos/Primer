@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "71e23f4d-0c18-445f-832a-7d1aa577fe85",
+		"name": "Primer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://api.sandbox.primer.io/auth/client-token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Api-Key",
+						"value": "793ac35d-4834-4462-90dd-d795cdf76633",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.sandbox.primer.io/auth/client-token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sandbox",
+						"primer",
+						"io"
+					],
+					"path": [
+						"auth",
+						"client-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.sandbox.primer.io/payments",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Api-Key",
+						"value": "793ac35d-4834-4462-90dd-d795cdf76633",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"amount\": 1000,\r\n        \"currencyCode\": \"GBP\",\r\n        \"orderId\": \"order-123\",\r\n        \"paymentInstrument\": {\r\n            \"token\": \"tok_auth_authorized_card\"\r\n        },\r\n        \"metadata\": {\r\n            \"merchantId\": \"TestAccount792\"\r\n        }\r\n}"
+				},
+				"url": {
+					"raw": "https://api.sandbox.primer.io/payments",
+					"protocol": "https",
+					"host": [
+						"api",
+						"sandbox",
+						"primer",
+						"io"
+					],
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
