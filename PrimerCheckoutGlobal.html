@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- checkout.html -->
+<html>
+    <!-- This added styling and css is entirely optional -->
+    <head>
+        <style>
+            #checkout-container {
+                display: flex;
+                flex-direction: column;
+                padding: 12px 24px;
+            }
+        </style>
+        <link rel="stylesheet" href="https://assets.primer.io/primer-sdk-web/v1.4.0/Checkout.css" />
+    </head>
+    <body>
+        <div id="checkout-container"></div>
+        <script src="https://assets.primer.io/primer-sdk-web/v1.4.0/Primer.min.js" crossorigin="anonymous"></script>
+        <!-- Include your script to initialize the SDK and send data to Primer -->
+        <script>
+		// client.js
+
+window.addEventListener("load", onLoaded);
+
+async function onLoaded() {
+
+
+
+  const primer = new Primer({
+     credentials: { clientToken: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MjM1MTE5ODcsImFjY2Vzc1Rva2VuIjoiYjk4ZTcxYzUtMTU3My00ZGM4LWJiY2ItNWY1MWIyN2I2OWFlIiwiYW5hbHl0aWNzVXJsIjoiaHR0cHM6Ly9hbmFseXRpY3MuYXBpLnNhbmRib3guY29yZS5wcmltZXIuaW8vbWl4cGFuZWwiLCJpbnRlbnQiOiJDSEVDS09VVCIsImNvbmZpZ3VyYXRpb25VcmwiOiJodHRwczovL2FwaS5zYW5kYm94LnByaW1lci5pby9jbGllbnQtc2RrL2NvbmZpZ3VyYXRpb24iLCJjb3JlVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5wcmltZXIuaW8iLCJwY2lVcmwiOiJodHRwczovL3Nkay5hcGkuc2FuZGJveC5wcmltZXIuaW8iLCJlbnYiOiJTQU5EQk9YIiwidGhyZWVEU2VjdXJlSW5pdFVybCI6Imh0dHBzOi8vc29uZ2JpcmRzdGFnLmNhcmRpbmFsY29tbWVyY2UuY29tL2NhcmRpbmFsY3J1aXNlL3YxL3NvbmdiaXJkLmpzIiwidGhyZWVEU2VjdXJlVG9rZW4iOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpJVXpJMU5pSjkuZXlKcWRHa2lPaUptWm1RME9HWTVNeTB3TmpKakxUUXlNekl0T0dZeVl5MDVabVEyWlRrNE1XWmlZMlVpTENKcFlYUWlPakUyTWpNME1qVTFPRGNzSW1semN5STZJalZsWWpWaVlXVmpaVFpsWXpjeU5tVmhOV1ppWVRkbE5TSXNJazl5WjFWdWFYUkpaQ0k2SWpWbFlqVmlZVFF4WkRRNFptSmtOakE0T0RoaU9HVTBOQ0o5LmpncEI4S090bl8wWTluMGtXRUJMdXZ6V1JjVnhCNGJGRzJFeVUzSTlEOFkiLCJwYXltZW50RmxvdyI6IkRFRkFVTFQifQ.LzsBxnGOYXOGfxTmByr3xjy_8pB2njMOSWDED00KreE" }, // Your server generated client token
+  });
+
+  // Use `.checkout()` to initialize and render the UI
+  await primer.checkout({
+    // Specify the selector of the container element
+    container: "#checkout-container",
+
+    /**
+     * When a payment method is chosen and the customer clicks 'Pay',
+     * the payment method is tokenized and you'll receive a token in the
+     * `onTokenizeSuccess` callback which you can send to your server
+     * to authorize a transaction.
+     */
+    onTokenizeSuccess(paymentMethod) {
+      // Send the payment method token to your server
+      return fetch("/api/authorize", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(paymentMethod),
+      });
+    },
+
+    /**
+     * In case there is an error with tokenization, you might want to prompt
+     * the customer to choose a different payment method
+     */
+    onTokenizeError(error) {
+      // Ask for another payment method
+    },
+  });
+}
+		</script>
+    </body>
+</html>
